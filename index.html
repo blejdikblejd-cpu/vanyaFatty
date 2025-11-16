@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кнопка "Ваня жирный"</title>
+    
+    <!-- Добавлено для SEO и социальных сетей -->
+    <meta name="description" content="Интерактивная кнопка Ваня жирный со звуком свиньи из Майнкрафта">
+    <meta name="keywords" content="Ваня жирный, котлета, майнкрафт, свинья, звук, кликер">
+    
+    <!-- Favicon (можно добавить позже) -->
+    <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico"> -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #5a3921;
+            background: #8B4513;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Фон котлеты с зубами */
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                /* Основной цвет котлеты */
+                radial-gradient(ellipse at center, #A0522D 0%, #8B4513 70%),
+                /* Текстура котлеты */
+                radial-gradient(circle at 20% 30%, #CD853F 10%, transparent 11%),
+                radial-gradient(circle at 70% 20%, #D2691E 8%, transparent 9%),
+                radial-gradient(circle at 40% 70%, #B8860B 12%, transparent 13%),
+                radial-gradient(circle at 80% 60%, #DAa520 7%, transparent 8%),
+                /* Верхние зубы */
+                radial-gradient(ellipse at 20% 15%, #ffffff 8%, transparent 9%),
+                radial-gradient(ellipse at 35% 12%, #ffffff 9%, transparent 10%),
+                radial-gradient(ellipse at 50% 15%, #ffffff 10%, transparent 11%),
+                radial-gradient(ellipse at 65% 12%, #ffffff 9%, transparent 10%),
+                radial-gradient(ellipse at 80% 15%, #ffffff 8%, transparent 9%),
+                /* Нижние зубы */
+                radial-gradient(ellipse at 20% 85%, #ffffff 8%, transparent 9%),
+                radial-gradient(ellipse at 35% 88%, #ffffff 9%, transparent 10%),
+                radial-gradient(ellipse at 50% 85%, #ffffff 10%, transparent 11%),
+                radial-gradient(ellipse at 65% 88%, #ffffff 9%, transparent 10%),
+                radial-gradient(ellipse at 80% 85%, #ffffff 8%, transparent 9%);
+            z-index: -1;
+        }
+        
+        /* Точка в конце текста на фоне */
+        body:after {
+            content: ".";
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 100px;
+            color: rgba(255, 255, 255, 0.3);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(3px);
+            border: 2px solid rgba(139, 69, 19, 0.5);
+        }
+        
+        h1 {
+            color: #8B4513;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2);
+        }
+        
+        .kotleta-container {
+            position: relative;
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .kotleta-button {
+            width: 220px;
+            height: 120px;
+            background: 
+                radial-gradient(circle at 30% 40%, #d2691e 10%, transparent 11%),
+                radial-gradient(circle at 70% 30%, #cd853f 8%, transparent 9%),
+                radial-gradient(circle at 40% 70%, #b8860b 12%, transparent 13%),
+                radial-gradient(circle at 80% 60%, #daa520 7%, transparent 8%),
+                linear-gradient(135deg, #8B4513 0%, #a0522d 50%, #d2691e 100%);
+            border-radius: 60px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 
+                0 15px 25px rgba(0, 0, 0, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 6px solid #5D2906;
+            overflow: hidden;
+        }
+        
+        .kotleta-button:before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background: 
+                radial-gradient(circle at 20% 30%, #daa520 5%, transparent 6%),
+                radial-gradient(circle at 60% 20%, #b8860b 6%, transparent 7%),
+                radial-gradient(circle at 80% 70%, #cd853f 8%, transparent 9%),
+                linear-gradient(135deg, #a0522d 0%, #8B4513 100%);
+            border-radius: 50px;
+            box-shadow: 
+                inset 0 5px 15px rgba(255, 255, 255, 0.4),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .kotleta-button:after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 80px;
+            background: 
+                radial-gradient(circle at 30% 60%, #f4a460 10%, transparent 11%),
+                radial-gradient(circle at 70% 40%, #deb887 8%, transparent 9%),
+                radial-gradient(ellipse at center, #cd853f 0%, #8B4513 70%);
+            border-radius: 40px;
+            box-shadow: 
+                inset 0 3px 10px rgba(255, 255, 255, 0.3),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.4);
+        }
+        
+        .kotleta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 18px 30px rgba(0, 0, 0, 0.35),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.5);
+        }
+        
+        .kotleta-button:active {
+            transform: scale(0.95);
+            box-shadow: 
+                0 8px 15px rgba(0, 0, 0, 0.25),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+        }
+        
+        .button-text {
+            position: relative;
+            z-index: 10;
+            color: #fff;
+            font-weight: bold;
+            font-size: 22px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .counter {
+            font-size: 24px;
+            color: #8B4513;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+        
+        .counter-number {
+            font-size: 36px;
+            color: #5D2906;
+            display: inline-block;
+            min-width: 100px;
+            background: linear-gradient(to bottom, #F0D9B5, #E8C9A3);
+            padding: 8px 20px;
+            border-radius: 15px;
+            border: 3px solid #8B4513;
+            box-shadow: 0 5px 10px rgba(139, 69, 19, 0.2);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #8B4513;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Добавлено: индикатор загрузки */
+        .loading {
+            display: none;
+            color: #8B4513;
+            margin-top: 10px;
+        }
+
+        /* Добавлено: сообщение об ошибке звука */
+        .sound-error {
+            display: none;
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .kotleta-button {
+                width: 180px;
+                height: 100px;
+            }
+            
+            .kotleta-button:before {
+                width: 160px;
+                height: 80px;
+            }
+            
+            .kotleta-button:after {
+                width: 140px;
+                height: 60px;
+            }
+            
+            .button-text {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Кнопка Ваня жирный</h1>
+        
+        <div class="kotleta-container">
+            <div class="kotleta-button" id="kotletaButton">
+                <div class="button-text">Ваня жирный</div>
+            </div>
+        </div>
+        
+        <!-- Добавлено: индикатор загрузки -->
+        <div class="loading" id="loading">Загрузка звука...</div>
+        
+        <!-- Добавлено: сообщение об ошибке -->
+        <div class="sound-error" id="soundError">
+            Для звука нажмите на кнопку! 🔈
+        </div>
+        
+        <div class="counter">
+            Нажатий: <span class="counter-number" id="counter">0</span>
+        </div>
+        
+        <div class="footer">
+            Сделано с любовью к котлетам и Майнкрафту
+        </div>
+    </div>
+
+    <script>
+        // Получаем элементы DOM
+        const kotletaButton = document.getElementById('kotletaButton');
+        const counterElement = document.getElementById('counter');
+        const loadingElement = document.getElementById('loading');
+        const soundErrorElement = document.getElementById('soundError');
+
+        // Загружаем счет из localStorage или устанавливаем 0
+        let clickCount = parseInt(localStorage.getItem('kotletaClickCount')) || 0;
+        counterElement.textContent = clickCount;
+        
+        // Создаем аудио элемент для звука свиньи из Майнкрафта
+        const pigSound = new Audio();
+        
+        // Улучшенный источник звука - используем несколько вариантов на случай недоступности
+        const soundSources = [
+            "https://www.soundjay.com/misc/sounds/pig-1.mp3",
+            "https://assets.mixkit.co/sfx/preview/mixkit-pig-grunt-1711.mp3",
+            "https://www.sounds-resource.com/resources/sounds/minecraft/sounds/mob/pig/say1.ogg"
+        ];
+        
+        pigSound.src = soundSources[0];
+        pigSound.volume = 0.7;
+        
+        // Предзагрузка звука
+        loadingElement.style.display = 'block';
+        pigSound.load();
+        
+        pigSound.addEventListener('canplaythrough', function() {
+            loadingElement.style.display = 'none';
+            console.log("Звук готов к воспроизведению");
+        });
+        
+        pigSound.addEventListener('error', function() {
+            loadingElement.style.display = 'none';
+            soundErrorElement.style.display = 'block';
+            console.log("Ошибка загрузки звука");
+        });
+
+        // Функция для воспроизведения звука
+        function playPigSound() {
+            // Пытаемся воспроизвести звук
+            pigSound.currentTime = 0;
+            const playPromise = pigSound.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(e => {
+                    soundErrorElement.style.display = 'block';
+                    console.log("Автовоспроизведение заблокировано. Нажмите на котлету для звука.");
+                });
+            }
+        }
+        
+        // Обработчик нажатия на кнопку-котлету
+        kotletaButton.addEventListener('click', function() {
+            // Увеличиваем счетчик
+            clickCount++;
+            counterElement.textContent = clickCount;
+            
+            // Сохраняем в localStorage
+            localStorage.setItem('kotletaClickCount', clickCount);
+            
+            // Воспроизводим звук
+            playPigSound();
+            
+            // Скрываем сообщение об ошибке при успешном клике
+            soundErrorElement.style.display = 'none';
+            
+            // Анимация нажатия
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+
+        // Добавляем инструкцию для пользователя
+        console.log("Нажмите на котлету, чтобы услышать звук свиньи и увеличить счетчик!");
+        
+        // Добавлено: обработка видимости страницы (для мобильных устройств)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // Страница снова активна - можно перезагрузить звук если нужно
+                pigSound.load();
+            }
+        });
+    </script>
+</body>
+</html>
